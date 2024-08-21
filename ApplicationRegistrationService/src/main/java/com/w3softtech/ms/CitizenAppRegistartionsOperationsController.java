@@ -18,7 +18,7 @@ public class CitizenAppRegistartionsOperationsController {
 	@Autowired
 	private ICitizenApplicationRegistrationService registrationService;
 
-	@PostMapping("/save")
+	/*@PostMapping("/save")
 	public ResponseEntity<String> saveCitizenapplication(@RequestBody CitizenAppRegistrationInputs inputs){
 		try {
 			Integer appId = registrationService.regiserCitizenApplication(inputs);
@@ -28,7 +28,10 @@ public class CitizenAppRegistartionsOperationsController {
 				return new ResponseEntity<String>("Invalid SSN/Citizen must belong to California State",HttpStatus.OK);
 		}catch (Exception e) {
 			return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}*/
+	@PostMapping("/save")
+	public ResponseEntity<String> saveCitizenapplication(@RequestBody CitizenAppRegistrationInputs inputs) throws Exception{
+			Integer appId = registrationService.regiserCitizenApplication(inputs);
+				return new ResponseEntity<String>("Citizen Application is Registered with Id:: "+appId,HttpStatus.CREATED);
 		}
-		
-	}
 }
