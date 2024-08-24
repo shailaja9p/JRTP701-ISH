@@ -109,10 +109,7 @@ public class DcMngtServiceImpl implements IDcMngtService {
 		return children.get(0).getCaseNo();
 	}
 
-	@Override
-	public DcIncomeEntity showDcIncomeEntity(Integer caseNo) {
-		return incomeRepo.findByCaseNo(caseNo);
-	}
+	
 	@Override
 	public DcSummeryReport showDcSummery(Integer caseNo) {
 		DcIncomeEntity incomeEntity = incomeRepo.findByCaseNo(caseNo);

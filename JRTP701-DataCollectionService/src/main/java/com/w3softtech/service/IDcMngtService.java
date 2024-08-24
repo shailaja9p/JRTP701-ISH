@@ -18,5 +18,4 @@ public interface IDcMngtService {
 	Integer saveEducationDetails(EducationInputs education);
 	Integer saveChildrenDetails(List<ChildInputs> children);
 	DcSummeryReport showDcSummery(Integer caseNo);
-	DcIncomeEntity showDcIncomeEntity(Integer caseNo);
 }

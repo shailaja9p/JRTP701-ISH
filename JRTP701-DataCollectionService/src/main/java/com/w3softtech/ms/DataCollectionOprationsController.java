@@ -65,10 +65,6 @@ public class DataCollectionOprationsController {
 		DcSummeryReport report = dataMngtService.showDcSummery(caseNo);
 		return new ResponseEntity<DcSummeryReport>(report,HttpStatus.OK);
 	}
-	//public DcIncomeEntity showDcIncomeEntity(Integer caseNo) {
-	@GetMapping("/incomeDetails/{caseNo}")
-	public ResponseEntity<DcIncomeEntity> showDcIncomeEntity(@PathVariable Integer caseNo){
-		DcIncomeEntity income = dataMngtService.showDcIncomeEntity(caseNo);
-		return new ResponseEntity<DcIncomeEntity>(income,HttpStatus.OK);
-	}
+
+	
 }
