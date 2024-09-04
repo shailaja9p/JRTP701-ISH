@@ -22,6 +22,7 @@ public class CoTriggersEntity {
 	//pdf means byte[]... eg:.. images may be there
 	//for text document means char[] ... eg: pure notepad
 	@Lob
+	@Column(length = 10000)
 	private byte[] coNoticePdf;
 	@Column(length = 30)
 	private String triggerStatus="pending";

@@ -19,6 +19,9 @@ import com.lifetree.bindings.CaseWorkerData;
 import com.lifetree.bindings.PlanData;
 import com.lifetree.service.IAdminMngmtService;
 
+import io.swagger.v3.oas.models.media.MediaType;
+import io.swagger.v3.oas.models.media.XML;
+
 @RestController
 @RequestMapping("/admin-api")
 public class AdminOperationsController {
@@ -38,13 +41,13 @@ public class AdminOperationsController {
 		return new ResponseEntity<String>(msg, HttpStatus.CREATED);
 	}
 
-	@GetMapping("/showAllPlans")
+	@GetMapping(path="/showAllPlans",produces = {"application/xml","application/json"})
 	public ResponseEntity<?> getAllPlans() {
 		List<PlanData> allPlans = adminService.showAllPlans();
 		return new ResponseEntity<List<PlanData>>(allPlans, HttpStatus.OK);
 	}
 
-	@GetMapping("/findPlan/{planId}")
+	@GetMapping(path="/findPlan/{planId}",produces = {"application/json"})
 	public ResponseEntity<PlanData> showAllPlanById(@PathVariable Integer planId) {
 		PlanData plan = adminService.showPlanById(planId);
 		return new ResponseEntity<PlanData>(plan, HttpStatus.OK);
@@ -73,12 +76,12 @@ public class AdminOperationsController {
 		String worker = adminService.saveCaseWorker(data);
 		return new ResponseEntity<String>(worker,HttpStatus.CREATED);
 	}
-	@GetMapping("/showAllCaseWorkers")
+	@GetMapping(path="/showAllCaseWorkers",produces = {"application/xml","application/json"})
 	public ResponseEntity<List<CaseWorkerData>> showAllCaseWorkers(){
 		List<CaseWorkerData> caseWorkers = adminService.showAllCaseWorkers();
 		return new ResponseEntity<List<CaseWorkerData>>(caseWorkers,HttpStatus.OK);
 	}
-	@GetMapping("/findCaseWorkerById/{cwId}")
+	@GetMapping(path="/findCaseWorkerById/{cwId}",produces = {"application/xml"})
 	public ResponseEntity<CaseWorkerData> showCaseWorkerById(@PathVariable Integer cwId) {
 		CaseWorkerData data = adminService.showCaseWorkerById(cwId);
 		return new ResponseEntity<CaseWorkerData>(data,HttpStatus.OK);
