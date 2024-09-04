@@ -35,8 +35,6 @@ public class EligibilityDeterminationMgmtServiceImpl implements IEligibilityDete
 	@Autowired
 	private IPlanRepository planRepo;
 	@Autowired
-	private IEligibilityDetermineRepository eligibilityRepo;
-	@Autowired
 	private IDcIncomeRepository incomeRepo;
 	@Autowired
 	private IDcChildrenRepository childRepo;
@@ -65,21 +63,27 @@ public class EligibilityDeterminationMgmtServiceImpl implements IEligibilityDete
 		if (optPlanEntity.isPresent()) {
 			planName = optPlanEntity.get().getPlanName();
 		}
+	
+		Optional<CitizenAppRegistartionEntity> optCitizenEntity = citizenRepo.findById(appId);
 		int citizenAge = 0;
 		String citizenName=null;
-		Optional<CitizenAppRegistartionEntity> optCitizenEntity = citizenRepo.findById(appId);
+		long citizenSSN = 0L;
 		if (optCitizenEntity.isPresent()) {
 			CitizenAppRegistartionEntity citizenEntity = optCitizenEntity.get();
 			LocalDate dob = citizenEntity.getDob();
 			citizenName=citizenEntity.getFullName();
 			citizenAge = Period.between(dob, LocalDate.now()).getYears();
+			citizenSSN =citizenEntity.getSsn();
 		}
 		//call helper method to plan conditions
 		EligibilityDetailsOutput elgOutput = applyPlanConditions(caseNo, planName, citizenAge);
 		elgOutput.setHolderName(citizenName);
+		
 		// save Eligibility entity object
 		EligibilityDetailsEntity elgEntity = new EligibilityDetailsEntity();
 		BeanUtils.copyProperties(elgOutput, elgEntity);
+		elgEntity.setCaseNo(caseNo);
+		elgEntity.setHolderSSN(citizenSSN);
 		elgRepo.save(elgEntity);
 		
 		// save COTrigger object
