@@ -62,7 +62,7 @@ public class AdminOperationsController {
 	@DeleteMapping("/deletePlan/{planId}")
 	public ResponseEntity<String> deletePlan(@PathVariable Integer planId) {
 		String msg = adminService.deletePlan(planId);
-		return new ResponseEntity<String>(msg, HttpStatus.OK);
+		return new ResponseEntity<String>(msg,HttpStatus.OK);
 	}
 
 	@PutMapping("/status-change/{planId}/{status}")
