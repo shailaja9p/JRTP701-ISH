@@ -1,0 +1,21 @@
+server:
+  port: 7076
+spring:
+  batch:
+    job:
+      enabled: false #until I call the service batch processing will not done automatically
+    jdbc:
+      initialize-schema: always #job repository related table will be created automatically
+  application:
+    name: JRTP701-JRTP701-BenefitInsurenceAPI
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///jrtp701-ish-db
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+  
